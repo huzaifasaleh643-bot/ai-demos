@@ -1,0 +1,37 @@
+[
+  {
+    "step": "trigger: file_read",
+    "detail": "leads.csv → 10 rows",
+    "at": "2026-10-21T14:32:36.765Z"
+  },
+  {
+    "step": "validate: phone_numbers",
+    "detail": "10 valid, 0 rejected",
+    "at": "2026-10-21T14:32:36.766Z"
+  },
+  {
+    "step": "segment: apply_rules",
+    "detail": "HOT 4 · WINBACK 2 · NURTURE 4",
+    "at": "2026-10-21T14:32:36.766Z"
+  },
+  {
+    "step": "generate: personalised_messages",
+    "detail": "6 messages drafted",
+    "at": "2026-10-21T14:32:36.767Z"
+  },
+  {
+    "step": "order: by_priority",
+    "detail": "HOT before WINBACK",
+    "at": "2026-10-21T14:32:36.767Z"
+  },
+  {
+    "step": "action: send_messages",
+    "detail": "→ outbox/messages_2026-10-21-14-32.csv",
+    "at": "2026-10-21T14:32:36.769Z"
+  },
+  {
+    "step": "report: write_json",
+    "detail": "outbox/report.json",
+    "at": "2026-10-21T14:32:36.770Z"
+  }
+]

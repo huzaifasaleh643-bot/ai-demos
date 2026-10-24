@@ -1,0 +1,11 @@
+name,phone,plan,status,last_contact_days,source,city
+Rahul Sharma,+919812345671,pro,active,12,website,Delhi
+Ayesha Khan,+919812345672,trial,trial,3,instagram,Mumbai
+Vikram Singh,+919812345673,pro,active,21,referral,Jaipur
+Priya Nair,+919812345674,starter,active,2,website,Bangalore
+Arjun Mehta,+919812345675,pro,churned,45,google_ads,Pune
+Sneha Patel,+919812345676,trial,trial,9,instagram,Ahmedabad
+Imran Qureshi,+919812345677,starter,inactive,30,website,Hyderabad
+Neha Verma,+919812345678,pro,active,6,referral,Lucknow
+Karan Malhotra,+919812345679,trial,trial,1,google_ads,Chandigarh
+Divya Iyer,+919812345680,pro,active,15,website,Chennai

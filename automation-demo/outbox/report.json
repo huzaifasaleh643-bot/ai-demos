@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-10-21T14:32:36.769Z",
+  "duration_ms": 11,
+  "input_rows": 10,
+  "valid_leads": 10,
+  "segments": {
+    "HOT": 4,
+    "WINBACK": 2,
+    "NURTURE": 4
+  },
+  "messages_generated": 6,
+  "skipped": 4,
+  "manual_effort_saved_minutes": 24,
+  "output_file": "C:\\Users\\DELL\\ai-demos\\automation-demo\\outbox\\messages_2026-10-21-14-32.csv"
+}

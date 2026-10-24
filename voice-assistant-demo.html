@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Voice AI Demo — OmniDim style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0d;
+    --ink-2:#141418;
+    --ink-3:#1c1c22;
+    --line:#2a2a33;
+    --gold:#d4af37;
+    --gold-2:#f0d06a;
+    --text:#ececf1;
+    --muted:#8b8b98;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:radial-gradient(1200px 700px at 80% -10%, rgba(212,175,55,.12), transparent 60%), var(--ink);
+    color:var(--text);font-family:"DM Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    display:flex;flex-direction:column;min-height:100vh;
+  }
+  h1,h2,h3,h4{font-family:"Space Grotesk",system-ui,sans-serif;margin:0;letter-spacing:-.02em}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:38px;height:38px;border-radius:12px;background:var(--ink-3);border:1px solid var(--line);display:grid;place-items:center}
+  .logo span{width:12px;height:12px;border-radius:4px;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:block;box-shadow:0 0 18px rgba(212,175,55,.6)}
+  .brand b{font-family:"Space Grotesk";font-size:18px}
+  .brand small{display:block;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .pills{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .pill{border:1px solid var(--line);background:var(--ink-2);color:var(--muted);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;transition:.2s;font-weight:500}
+  .pill:hover{border-color:#3a3a46;color:var(--text)}
+  .pill.on{background:rgba(212,175,55,.12);border-color:rgba(212,175,55,.5);color:var(--gold-2)}
+
+  main{flex:1;display:grid;grid-template-columns:1.15fr .85fr;gap:0;min-height:0}
+  @media (max-width:980px){ main{grid-template-columns:1fr} }
+
+  /* ---------- left: call stage ---------- */
+  .stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;border-right:1px solid var(--line);overflow:hidden}
+  @media (max-width:980px){ .stage{border-right:none;border-bottom:1px solid var(--line)} }
+
+  .orb-wrap{position:relative;width:260px;height:260px;display:grid;place-items:center;margin:8px 0 24px}
+  .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(212,175,55,.18)}
+  .ring:nth-child(2){inset:26px;border-color:rgba(212,175,55,.12)}
+  .ring:nth-child(3){inset:52px;border-color:rgba(212,175,55,.08)}
+  .orb{
+    width:112px;height:112px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff5cf, var(--gold) 40%, #8a6f14 100%);
+    box-shadow:0 0 0 8px rgba(212,175,55,.07), 0 0 60px rgba(212,175,55,.35);
+    transition:transform .25s ease, box-shadow .3s ease;
+  }
+  body.listening .orb{animation:pulse 1.15s ease-in-out infinite}
+  body.speaking .orb{animation:speak .55s ease-in-out infinite alternate}
+  @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 8px rgba(212,175,55,.08),0 0 60px rgba(212,175,55,.35)}50%{transform:scale(1.07);box-shadow:0 0 0 18px rgba(212,175,55,.05),0 0 90px rgba(212,175,55,.5)}}
+  @keyframes speak{from{transform:scale(1)}to{transform:scale(1.09)}}
+
+  .bars{position:absolute;bottom:14px;display:flex;gap:4px;align-items:flex-end;height:34px}
+  .bars i{width:3px;background:linear-gradient(var(--gold-2),var(--gold));border-radius:2px;height:6px;opacity:.7}
+  body.listening .bars i, body.speaking .bars i{animation:bar .9s ease-in-out infinite}
+  .bars i:nth-child(2n){animation-delay:.15s}
+  .bars i:nth-child(3n){animation-delay:.3s}
+  @keyframes bar{0%,100%{height:6px}50%{height:30px}}
+
+  .status{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .status b{color:var(--gold-2);font-weight:600}
+  .verdict{font-family:"Space Grotesk";font-size:22px;text-align:center;min-height:62px;max-width:460px}
+
+  .controls{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;justify-content:center}
+  button{font-family:"DM Sans";font-weight:700;font-size:15px;border-radius:12px;padding:13px 22px;cursor:pointer;border:1px solid transparent;transition:.2s}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#1a1503;box-shadow:0 10px 24px -10px rgba(212,175,55,.7)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(212,175,55,.8)}
+  .btn-ghost{background:var(--ink-2);border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:#45454f}
+  .hint{margin-top:18px;font-size:12.5px;color:var(--muted);text-align:center;max-width:460px}
+
+  /* ---------- right: transcript ---------- */
+  .panel{display:flex;flex-direction:column;min-height:0;background:var(--ink-2)}
+  .panel-head{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .panel-head h2{font-size:15px;font-weight:600}
+  .dot{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 12px #3ddc84;display:inline-block;margin-right:8px}
+  .log{flex:1;overflow-y:auto;padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-height:280px;max-height:calc(100vh - 430px)}
+  .log::-webkit-scrollbar{width:8px}
+  .log::-webkit-scrollbar-thumb{background:#2f2f38;border-radius:8px}
+
+  .msg{max-width:88%;padding:11px 15px;border-radius:14px;font-size:14.5px;animation:in .35s cubic-bezier(.16,1,.3,1)}
+  @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .msg.agent{align-self:flex-start;background:var(--ink-3);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg.user{align-self:flex-end;background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.32);color:#fdf3d0;border-bottom-right-radius:4px}
+  .msg .who{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .msg.agent .who{color:var(--gold-2);opacity:.75}
+
+  .actions{border-top:1px solid var(--line);padding:14px 22px 18px;background:#101014}
+  .actions h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .action-list{display:flex;flex-direction:column;gap:6px;max-height:150px;overflow-y:auto;font-family:ui-monospace,Consolas,monospace;font-size:12px}
+  .act{display:flex;gap:8px;align-items:baseline;color:#9fa0ab;animation:in .3s}
+  .act .tag{color:var(--gold-2)}
+  .act.ok .tag{color:#3ddc84}
+  .act .arrow{color:#4a4a55}
+
+  .composer{display:flex;gap:10px;padding:14px 22px;border-top:1px solid var(--line);background:var(--ink-2)}
+  .composer input{flex:1;background:var(--ink-3);border:1px solid var(--line);border-radius:12px;padding:12px 15px;color:var(--text);font-family:inherit;font-size:14.5px;outline:none}
+  .composer input:focus{border-color:rgba(212,175,55,.55);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
+  .composer button{padding:12px 18px;font-size:14px}
+
+  footer{border-top:1px solid var(--line);padding:14px 28px;display:flex;gap:26px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:var(--muted);background:#08080a}
+  footer b{color:var(--text);font-weight:600}
+  footer span{display:flex;align-items:center;gap:7px}
+  footer .n{width:18px;height:18px;border-radius:50%;background:var(--ink-3);border:1px solid var(--line);display:grid;place-items:center;font-size:10px;color:var(--gold-2)}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo"><span></span></div>
+    <div>
+      <b>Aria — Voice AI</b>
+      <small>Live demo · no API key needed</small>
+    </div>
+  </div>
+  <div class="pills">
+    <button class="pill on" id="lang-hi">Hinglish</button>
+    <button class="pill" id="lang-en">English</button>
+    <button class="pill" id="btn-script">▶ Play scripted call</button>
+    <button class="pill" id="btn-reset">↺ Reset</button>
+  </div>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="status" id="status">Tap <b>Start call</b> — ya neeche type karo</div>
+    <div class="orb-wrap">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+      <div class="orb"></div>
+      <div class="bars">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+    <div class="verdict" id="verdict">Sun rahi hoon… boliye, kya madad kar sakti hoon?</div>
+    <div class="controls">
+      <button class="btn-gold" id="btn-call">🎙 Start call</button>
+      <button class="btn-ghost" id="btn-mute">🔊 Voice: ON</button>
+    </div>
+    <p class="hint">Mic sirf Chrome/Edge mein chalta hai aur <b>localhost</b> pe. Na chale to neeche type karke bhi agent se baat kar sakte ho — same brain chalega.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Live transcript</h2>
+      <div style="font-size:12px;color:var(--muted)" id="timer">00:00</div>
+    </div>
+    <div class="log" id="log"></div>
+    <div class="actions">
+      <h3>Agent actions (backend calls)</h3>
+      <div class="action-list" id="actions"></div>
+    </div>
+    <form class="composer" id="composer">
+      <input id="input" placeholder="Type: 'kal 4 baje appointment chahiye'…" autocomplete="off" />
+      <button class="btn-ghost" type="submit">Send</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <span><i class="n">1</i> <b>Speech-to-Text</b> — mic → text</span>
+  <span><i class="n">2</i> <b>Brain</b> — intent + slots (production mein LLM)</span>
+  <span><i class="n">3</i> <b>Actions</b> — calendar, CRM, transfer</span>
+  <span><i class="n">4</i> <b>Text-to-Speech</b> — text → awaaz</span>
+</footer>
+
+<script>
+/* =========================================================
+   1. AGENT BRAIN  (yahan rules hain — production mein yahan
+      LLM + function calling lagti hai)
+   ========================================================= */
+const state = {
+  lang: 'hi',                 // 'hi' = Hinglish, 'en' = English
+  muted: false,
+  busy: false,
+  stage: 'idle',              // idle -> ask_name -> ask_service -> ask_time -> done
+  slots: { name: null, service: null, datetime: null },
+  startedAt: null,
+  timerId: null,
+};
+
+const T = {
+  hi: {
+    greet: () => "Namaste! Main Aria hoon, NexusAI se. Aap appointment book karna chahte hain, order ka status puchna hai, ya pricing jaanna hai?",
+    askName: () => "Bilkul! Pehle bataiye aapka naam kya hai?",
+    askService: (n) => `Shukriya ${n}. Aapko kis cheez ka appointment chahiye — demo call, consultation, ya support session?`,
+    askTime: () => "Perfect. Kaunsa din aur time theek rahega? Jaise 'kal 4 baje' ya 'Friday 11 am'.",
+    confirm: (s) => `Theek hai — ${s.name}, ${s.service}, ${s.datetime}. Main ye booking confirm kar deti hoon.`,
+    booked: (s) => `Ho gaya! ${s.datetime} ka ${s.service} aapke naam ${s.name} par book hai. Confirmation SMS aur email bhej diya hai. Aur kuch chahiye?`,
+    order: () => "Main order check kar rahi hoon… Aapka order #4821 shipped hai aur kal shaam tak pahunch jaana chahiye. Tracking link SMS par bhej diya hai.",
+    price: () => "Hamare plans: Starter free hai 10 hazaar calls tak, Pro 49 dollar per month, aur Enterprise custom. Aapke use case ke hisaab se main Pro suggest karungi.",
+    human: () => "Bilkul, main abhi aapko hamare team member se connect kar rahi hoon. Ek minute please… Call transfer ho rahi hai.",
+    hours: () => "Hum Monday se Saturday, subah 9 baje se shaam 7 baje tak available hain. Aap abhi bhi ye assistant se 24/7 baat kar sakte hain.",
+    bye: () => "Shukriya aapka time! Aapka din shubh rahe. Bye!",
+    fallback: (n) => `Sorry ${n || ''}, main samajh nahi paayi. Aap appointment, order status, pricing ya human agent — inmein se kuch chun sakte hain?`,
+  },
+  en: {
+    greet: () => "Hi! I'm Aria from NexusAI. Would you like to book an appointment, check an order, or hear our pricing?",
+    askName: () => "Sure! First, what's your name?",
+    askService: (n) => `Thanks ${n}. What kind of appointment — a demo call, a consultation, or a support session?`,
+    askTime: () => "Great. Which day and time works for you? For example 'tomorrow 4 pm'.",
+    confirm: (s) => `Okay — ${s.name}, ${s.service}, ${s.datetime}. Let me confirm that booking.`,
+    booked: (s) => `Done! Your ${s.service} is booked for ${s.datetime} under ${s.name}. I've sent a confirmation SMS and email. Anything else?`,
+    order: () => "Let me check… Your order #4821 has shipped and should arrive tomorrow evening. I've texted you the tracking link.",
+    price: () => "Plans: Starter is free up to 10,000 calls, Pro is $49 per month, Enterprise is custom. For your use case I'd suggest Pro.",
+    human: () => "Of course — connecting you to a team member now. One moment… transferring the call.",
+    hours: () => "We're open Monday to Saturday, 9 am to 7 pm. But I'm available 24/7 right here.",
+    bye: () => "Thanks for your time. Have a great day!",
+    fallback: (n) => `Sorry ${n || ''}, I didn't catch that. You can ask about appointments, order status, pricing, or a human agent.`,
+  }
+};
+
+const has = (t, arr) => arr.some(k => t.includes(k));
+
+function detectIntent(text) {
+  const t = text.toLowerCase();
+  if (has(t, ['appointment','booking','book ','slot','schedule','milna','time chahiye','demo call','consult'])) return 'book';
+  if (has(t, ['order','tracking','delivery','shipment','kahan hai','kab aayega','status'])) return 'order';
+  if (has(t, ['price','pricing','cost','kitna','charges','fees','rate','plan'])) return 'price';
+  if (has(t, ['human','agent','insaan','representative','transfer','baat karni','call back'])) return 'human';
+  if (has(t, ['timing','hours','khula','open','kab tak','close'])) return 'hours';
+  if (has(t, ['bye','thank','shukriya','dhanyavad','goodbye','that\'s all'])) return 'bye';
+  if (has(t, ['hello','hi ','hey','namaste','salaam','assalam'])) return 'greet';
+  return 'unknown';
+}
+
+function extractName(text) {
+  const t = text.trim();
+  const m = t.match(/(?:my name is|mera naam|naam hai|i am|main|this is)\s+([a-zA-Z]{2,20})/i);
+  if (m) return cap(m[1]);
+  // agar sirf ek word bola gaya
+  const one = t.match(/^([a-zA-Z]{2,20})$/);
+  if (one && !['kal','aaj','haan','yes','no','nahi'].includes(one[1].toLowerCase())) return cap(one[1]);
+  const first = t.split(/\s+/)[0];
+  return /^[a-zA-Z]{2,20}$/.test(first) ? cap(first) : 'ji';
+}
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+
+function extractService(text) {
+  const t = text.toLowerCase();
+  if (has(t, ['demo','product'])) return state.lang === 'hi' ? 'product demo' : 'product demo';
+  if (has(t, ['consult','advice','expert'])) return state.lang === 'hi' ? 'consultation' : 'consultation';
+  if (has(t, ['support','help','issue','problem','technical'])) return state.lang === 'hi' ? 'support session' : 'support session';
+  if (has(t, ['meeting','call','baat'])) return state.lang === 'hi' ? 'discovery call' : 'discovery call';
+  return state.lang === 'hi' ? 'consultation' : 'consultation';
+}
+
+function extractDateTime(text) {
+  const t = text.toLowerCase();
+  let day = null, time = null;
+  if (has(t, ['tomorrow','kal'])) day = 'tomorrow';
+  else if (has(t, ['today','aaj'])) day = 'today';
+  else if (has(t, ['monday','somvar'])) day = 'Monday';
+  else if (has(t, ['tuesday','mangal'])) day = 'Tuesday';
+  else if (has(t, ['wednesday','budh'])) day = 'Wednesday';
+  else if (has(t, ['thursday','guru','jumerat'])) day = 'Thursday';
+  else if (has(t, ['friday','shukra','jumma'])) day = 'Friday';
+  else if (has(t, ['saturday','shani'])) day = 'Saturday';
+  else if (has(t, ['sunday','itvar'])) day = 'Sunday';
+
+  const tm = t.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm|baje|bje|o'clock)?/);
+  if (tm) {
+    let h = parseInt(tm[1], 10);
+    const min = tm[2] ? tm[2] : '00';
+    const mer = tm[3] || (h <= 12 && h >= 6 ? 'pm' : '');
+    if (/pm/.test(mer) && h < 12) h += 0;
+    time = `${h}:${min} ${/pm/.test(mer) ? 'PM' : 'AM'}`;
+  }
+  if (!day && !time) return null;
+  return [day, time].filter(Boolean).join(' ').trim();
+}
+
+/* =========================================================
+   2. UI HELPERS
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const logEl = $('log'), actionsEl = $('actions'), statusEl = $('status'), verdictEl = $('verdict');
+
+function addMsg(who, text) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.innerHTML = `<span class="who">${who === 'agent' ? 'Aria · AI' : 'You'}</span>${escapeHtml(text)}`;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function addAction(label, value, ok = false) {
+  const d = document.createElement('div');
+  d.className = 'act' + (ok ? ' ok' : '');
+  d.innerHTML = `<span class="tag">${ok ? '✓' : '→'} ${escapeHtml(label)}</span><span class="arrow">·</span><span>${escapeHtml(value)}</span>`;
+  actionsEl.appendChild(d);
+  actionsEl.scrollTop = actionsEl.scrollHeight;
+}
+
+function setStatus(html) { statusEl.innerHTML = html; }
+function setBodyState(cls) { document.body.classList.remove('listening','speaking'); if (cls) document.body.classList.add(cls); }
+
+/* =========================================================
+   3. TTS  (text -> awaaz)
+   ========================================================= */
+let voices = [];
+function loadVoices() { voices = speechSynthesis.getVoices(); }
+loadVoices();
+if (typeof speechSynthesis !== 'undefined') speechSynthesis.onvoiceschanged = loadVoices;
+
+function speak(text, done) {
+  if (state.muted || typeof speechSynthesis === 'undefined') { if (done) setTimeout(done, 250); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const want = state.lang === 'hi' ? ['hi-IN','en-IN'] : ['en-US','en-GB','en-IN'];
+  let v = null;
+  for (const lang of want) { v = voices.find(x => x.lang === lang) || v; if (v) break; }
+  if (v) u.voice = v;
+  u.lang = state.lang === 'hi' ? 'en-IN' : 'en-US';
+  u.rate = 1.0; u.pitch = 1.05;
+  u.onstart = () => setBodyState('speaking');
+  u.onend = () => { setBodyState(null); if (done) done(); };
+  u.onerror = () => { setBodyState(null); if (done) done(); };
+  speechSynthesis.speak(u);
+}
+
+/* =========================================================
+   4. AGENT TURN
+   ========================================================= */
+function agentTurn(userText) {
+  addMsg('user', userText);
+  addAction('stt.transcript', `"${userText.slice(0, 42)}${userText.length > 42 ? '…' : ''}"`);
+
+  const intent = state.stage === 'ask_name' ? 'provide_name'
+    : state.stage === 'ask_service' ? 'provide_service'
+    : state.stage === 'ask_time' ? 'provide_time'
+    : detectIntent(userText);
+
+  addAction('nlu.intent', intent);
+
+  let reply = '';
+  const L = T[state.lang];
+
+  // --- slot filling flow ---
+  if (intent === 'book' || state.stage.startsWith('ask_')) {
+    if (state.stage === 'idle' || intent === 'book') {
+      if (state.slots.name) {
+        state.stage = 'ask_service';
+        reply = L.askService(state.slots.name);
+      } else {
+        state.stage = 'ask_name';
+        reply = L.askName();
+      }
+    } else if (state.stage === 'ask_name') {
+      state.slots.name = extractName(userText);
+      addAction('slot.name', state.slots.name, true);
+      state.stage = 'ask_service';
+      reply = L.askService(state.slots.name);
+    } else if (state.stage === 'ask_service') {
+      state.slots.service = extractService(userText);
+      addAction('slot.service', state.slots.service, true);
+      state.stage = 'ask_time';
+      reply = L.askTime();
+    } else if (state.stage === 'ask_time') {
+      const dt = extractDateTime(userText);
+      if (!dt) { reply = state.lang === 'hi' ? 'Sorry, din aur time phir se bata dijiye — jaise "kal 4 baje".' : "Sorry, could you say the day and time again — like 'tomorrow 4 pm'?"; }
+      else {
+        state.slots.datetime = dt;
+        addAction('slot.datetime', dt, true);
+        addAction('calendar.check_availability', `${dt} → 1 slot free`);
+        addAction('booking.create', `${state.slots.service} @ ${dt}`, true);
+        addAction('crm.lead_saved', state.slots.name, true);
+        addAction('sms.send', `+91 ••••• 4821`, true);
+        state.stage = 'done';
+        reply = L.booked(state.slots);
+        if (state.slots.datetime) verdictEl.textContent = `Appointment booked — ${dt}`;
+      }
+    }
+  } else if (intent === 'order') {
+    addAction('orders.lookup', 'order #4821');
+    reply = L.order();
+  } else if (intent === 'price') {
+    addAction('kb.search', 'pricing');
+    reply = L.price();
+  } else if (intent === 'human') {
+    addAction('call.transfer', 'support queue');
+    reply = L.human();
+  } else if (intent === 'hours') {
+    addAction('kb.search', 'business hours');
+    reply = L.hours();
+  } else if (intent === 'bye') {
+    addAction('call.end', 'reason: user goodbye', true);
+    reply = L.bye();
+  } else if (intent === 'greet') {
+    reply = L.greet();
+  } else {
+    addAction('nlu.fallback', 'no match → clarify');
+    reply = L.fallback(state.slots.name);
+  }
+
+  addMsg('agent', reply);
+  verdictEl.textContent = reply.length > 90 ? reply.slice(0, 88) + '…' : reply;
+  setStatus('Aria <b>bol rahi hai</b>…');
+  speak(reply, () => { if (state.stage !== 'done') setStatus('Tap mic ya type karo'); });
+  return reply;
+}
+
+/* =========================================================
+   5. STT  (mic -> text)
+   ========================================================= */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null, listening = false;
+
+function initRecog() {
+  if (!SR) return null;
+  const r = new SR();
+  r.lang = state.lang === 'hi' ? 'en-IN' : 'en-US';
+  r.interimResults = true;
+  r.continuous = false;
+  r.maxAlternatives = 1;
+  r.onresult = e => {
+    let finalText = '', interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) finalText += t; else interim += t;
+    }
+    if (interim) verdictEl.textContent = interim;
+    if (finalText.trim()) {
+      stopListening();
+      agentTurn(finalText.trim());
+    }
+  };
+  r.onerror = ev => {
+    stopListening();
+    if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
+      setStatus('Mic <b>blocked</b> — neeche type karke chalao');
+      addAction('stt.error', 'microphone permission denied');
+    } else if (ev.error !== 'aborted') {
+      setStatus('Mic error — <b>type karke</b> try karo');
+      addAction('stt.error', ev.error);
+    }
+  };
+  r.onend = () => { if (listening) stopListening(); };
+  return r;
+}
+
+function startListening() {
+  if (!SR) {
+    setStatus('Is browser mein mic nahi — <b>type karo</b>');
+    addAction('stt.unavailable', 'SpeechRecognition not supported');
+    return;
+  }
+  recog = recog || initRecog();
+  recog.lang = state.lang === 'hi' ? 'en-IN' : 'en-US';
+  try {
+    recog.start();
+    listening = true;
+    setBodyState('listening');
+    setStatus('<b>Sun rahi hoon</b>… boliye');
+    verdictEl.textContent = 'Listening…';
+    $('btn-call').textContent = '⏹ Stop';
+  } catch (e) { /* already started */ }
+}
+
+function stopListening() {
+  listening = false;
+  setBodyState(null);
+  if (recog) { try { recog.stop(); } catch {} }
+  $('btn-call').textContent = '🎙 Start call';
+ }
+
+/* =========================================================
+   6. TIMER
+   ========================================================= */
+function startTimer() {
+  if (state.timerId) return;
+  state.startedAt = Date.now();
+  state.timerId = setInterval(() => {
+    const s = Math.floor((Date.now() - state.startedAt) / 1000);
+    $('timer').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  }, 1000);
+}
+function stopTimer() { clearInterval(state.timerId); state.timerId = null; }
+
+/* =========================================================
+   7. SCRIPTED DEMO  (mic ke bina bhi chalta hai)
+   ========================================================= */
+const scriptHi = [
+  "Hello, mujhe appointment book karna hai",
+  "Mera naam Rahul hai",
+  "Product demo chahiye",
+  "Kal 4 baje",
+  "Thank you, bye"
+];
+const scriptEn = [
+  "Hi, I'd like to book an appointment",
+  "My name is Rahul",
+  "A product demo please",
+  "Tomorrow 4 pm",
+  "Thank you, bye"
+];
+
+async function playScript() {
+  if (state.busy) return;
+  resetAll(false);
+  state.busy = true;
+  startTimer();
+  setStatus('Scripted demo <b>chal raha hai</b>…');
+  const lines = state.lang === 'hi' ? scriptHi : scriptEn;
+  await sleep(400);
+  const greeting = T[state.lang].greet();
+  addMsg('agent', greeting);
+  verdictEl.textContent = greeting;
+  speak(greeting);
+  await sleep(1400);
+  for (const line of lines) {
+    agentTurn(line);
+    await sleep(2100);
+  }
+  state.busy = false;
+  setStatus('Demo complete — <b>Reset</b> dabao');
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* =========================================================
+   8. WIRING
+   ========================================================= */
+$('btn-call').addEventListener('click', () => {
+  if (listening) { stopListening(); setStatus('Stopped — <b>type karo</b> ya mic dobara dabao'); return; }
+  startTimer();
+  if (state.stage === 'idle' && logEl.children.length === 0) {
+    const g = T[state.lang].greet();
+    addMsg('agent', g);
+    verdictEl.textContent = g;
+    speak(g);
+    addAction('session.start', 'inbound web call');
+  }
+  startListening();
+});
+
+$('btn-mute').addEventListener('click', e => {
+  state.muted = !state.muted;
+  e.target.textContent = state.muted ? '🔇 Voice: OFF' : '🔊 Voice: ON';
+  if (state.muted) speechSynthesis.cancel();
+});
+
+$('btn-script').addEventListener('click', playScript);
+$('btn-reset').addEventListener('click', () => resetAll(true));
+
+$('composer').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = $('input').value.trim();
+  if (!v) return;
+  $('input').value = '';
+  startTimer();
+  if (state.stage === 'idle' && logEl.children.length === 0) {
+    const g = T[state.lang].greet();
+    addMsg('agent', g);
+    speak(g);
+    addAction('session.start', 'text channel');
+  }
+  agentTurn(v);
+});
+
+$('lang-hi').addEventListener('click', () => {
+  state.lang = 'hi';
+  $('lang-hi').classList.add('on'); $('lang-en').classList.remove('on');
+  resetAll(true);
+});
+$('lang-en').addEventListener('click', () => {
+  state.lang = 'en';
+  $('lang-en').classList.add('on'); $('lang-hi').classList.remove('on');
+  resetAll(true);
+});
+
+function resetAll(clearLog) {
+  stopListening();
+  stopTimer();
+  speechSynthesis.cancel();
+  state.stage = 'idle';
+  state.slots = { name: null, service: null, datetime: null };
+  state.busy = false;
+  if (clearLog) {
+    logEl.innerHTML = ''; actionsEl.innerHTML = ''; $('timer').textContent = '00:00';
+    setStatus('Tap <b>Start call</b> — ya neeche type karo');
+    verdictEl.textContent = 'Sun rahi hoon… boliye, kya madad kar sakti hoon?';
+  }
+}
+
+// greeting hint on load
+window.addEventListener('load', () => { loadVoices(); });
+</script>
+</body>
+</html>
