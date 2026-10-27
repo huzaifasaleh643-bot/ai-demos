@@ -1,5 +1,5 @@
 /* ============================================================
-   Pixora — design study replica of a modern AI creative site
+   Pyro — design study replica of a modern AI creative site
    Design tokens captured from REA evidence:
    brand #f40bf4 / #ff47ff / #c209c1 · bg #000 · panels #111-1c1c1c
    radius tokens 4/8/12/16/20/24/32 + 999px pills
@@ -103,36 +103,6 @@ em.accent { font-style: italic; font-weight: 500; }
 .btn-sm { padding: 9px 18px; font-size: 14px; }
 .btn .arrow { transition: transform 0.2s ease; }
 .btn:hover .arrow { transform: translateX(4px); }
-
-/* ---------- promo bar ---------- */
-.promo {
-  background: var(--brand-bright);
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-}
-.promo .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  padding-block: 9px;
-}
-.promo a { text-decoration: underline; text-underline-offset: 3px; }
-.countdown { display: flex; gap: 8px; align-items: center; }
-.countdown .box {
-  background: #fff;
-  border-radius: var(--r8);
-  min-width: 44px;
-  padding: 3px 6px;
-  text-align: center;
-  line-height: 1.15;
-}
-.countdown .box b { display: block; font-size: 15px; font-weight: 700; }
-.countdown .box span { font-size: 9px; letter-spacing: 0.08em; font-weight: 600; opacity: 0.7; }
-.countdown .sep { opacity: 0.55; }
-.promo .btn { padding: 8px 20px; font-size: 14px; }
 
 /* ---------- nav ---------- */
 .nav {
@@ -300,12 +270,18 @@ em.accent { font-style: italic; font-weight: 500; }
 
 /* ---------- prompt bar ---------- */
 .prompt {
+  position: sticky;
+  top: 80px;
+  z-index: 30;
   margin-top: clamp(26px, 4vw, 44px);
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
+  background: rgba(14, 14, 16, 0.95);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--r24);
   padding: 16px 18px 14px;
-  max-width: 900px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .prompt-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .prompt-tabs { display: flex; gap: 6px; }

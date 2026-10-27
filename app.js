@@ -1,23 +1,4 @@
-// Pixora — interactions (captured behaviour patterns: countdown, carousels, chips, tabs)
-
-/* ---------- promo countdown (counts down to 6d 16h 50m from load) ---------- */
-(() => {
-  const end = Date.now() + ((6 * 24 + 16) * 60 + 50) * 60 * 1000;
-  const d = document.getElementById("cd-d");
-  const h = document.getElementById("cd-h");
-  const m = document.getElementById("cd-m");
-  if (!d) return;
-  const pad = (n) => String(n).padStart(2, "0");
-  const tick = () => {
-    let ms = Math.max(0, end - Date.now());
-    const mins = Math.floor(ms / 60000);
-    d.textContent = pad(Math.floor(mins / 1440));
-    h.textContent = pad(Math.floor((mins % 1440) / 60));
-    m.textContent = pad(mins % 60);
-  };
-  tick();
-  setInterval(tick, 15000);
-})();
+// Pyro — interactions (captured behaviour patterns: carousels, chips, tabs)
 
 /* ---------- nav: border on scroll + mobile menu ---------- */
 (() => {
