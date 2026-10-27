@@ -284,6 +284,17 @@ em.accent { font-style: italic; font-weight: 500; }
   max-width: 760px;
   width: 92vw;
   box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+  transition: opacity 0.25s ease, max-width 0.32s ease, padding 0.25s ease, border-radius 0.25s ease;
+}
+.prompt.collapsed {
+  max-width: 420px;
+  padding: 12px 18px;
+  border-radius: var(--pill);
+  opacity: 0.85;
+}
+.prompt.collapsed .prompt-top,
+.prompt.collapsed .prompt-bottom {
+  display: none;
 }
 .prompt-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .prompt-tabs { display: flex; gap: 6px; }

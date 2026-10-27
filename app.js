@@ -13,6 +13,12 @@
   );
 })();
 
+/* ---------- prompt toggle (thin line → full box) ---------- */
+document.querySelector('.prompt')?.addEventListener('click', (e) => {
+  if (e.target.closest('.prompt-tab') || e.target.closest('.round-btn') || e.target.closest('.btn') || e.target.closest('.inspire')) return;
+  document.querySelector('.prompt')?.classList.toggle('collapsed');
+});
+
 /* ---------- carousels: arrow buttons scroll the rail ---------- */
 document.querySelectorAll("[data-carousel]").forEach((car) => {
   const rail = car.querySelector("[data-rail]");
