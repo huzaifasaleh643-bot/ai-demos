@@ -239,7 +239,7 @@ em.accent { font-style: italic; font-weight: 500; }
 
 .nav-arrow {
   position: absolute;
-  top: 50%;
+  top: 72%;
   transform: translateY(-50%);
   width: 42px; height: 42px;
   border-radius: 50%;
@@ -271,9 +271,9 @@ em.accent { font-style: italic; font-weight: 500; }
 /* ---------- prompt bar ---------- */
 .prompt {
   position: fixed;
-  top: 58%;
+  bottom: 90px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 100;
   background: rgba(14, 14, 16, 0.95);
   backdrop-filter: blur(22px);
