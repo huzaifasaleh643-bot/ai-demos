@@ -271,7 +271,7 @@ em.accent { font-style: italic; font-weight: 500; }
 /* ---------- prompt bar ---------- */
 .prompt {
   position: fixed;
-  bottom: 90px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
