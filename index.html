@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pixora — AI creative studio for every channel</title>
+<meta name="description" content="Design study replica: layout, structure and interaction patterns captured with REA. Original copy and artwork." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ PROMO BAR ============ -->
+<div class="promo">
+  <div class="wrap">
+    <span>50% off the yearly plan · limited season offer · <a href="#pricing">Terms apply</a></span>
+    <span class="muted" style="color:#000;opacity:.7">Ends in</span>
+    <div class="countdown" id="countdown">
+      <div class="box"><b id="cd-d">06</b><span>DAYS</span></div>
+      <span class="sep">:</span>
+      <div class="box"><b id="cd-h">16</b><span>HRS</span></div>
+      <span class="sep">:</span>
+      <div class="box"><b id="cd-m">50</b><span>MIN</span></div>
+    </div>
+    <a class="btn btn-dark" href="#pricing">Upgrade</a>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#"><span class="mark">◆</span> Pixora</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#video">Video <i class="chev"></i></a>
+      <a href="#images">Image <i class="chev"></i></a>
+      <a href="#agents">Agents <span class="badge hot">Hot</span> <i class="chev"></i></a>
+      <a href="#trends">Library <i class="chev"></i></a>
+      <a href="#integrations">Plugins <i class="chev"></i></a>
+      <a href="#business">Solutions <i class="chev"></i></a>
+      <a href="#community">Community <i class="chev"></i></a>
+      <a href="#pricing">Pricing <span class="badge save">Save big</span></a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-brand btn-sm" href="#">Start creating</a>
+      <a class="btn btn-ghost btn-sm" href="#">Log in</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Make any kind of content <span class="accent-text">for every channel</span></h1>
+      <p class="lede">Pick from 180+ AI models, get your work seen, and earn from it. Everything you need — on one subscription.</p>
+      <a class="btn btn-brand" href="#">Start creating <span class="arrow">→</span></a>
+    </div>
+
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card"><div class="thumb g1"></div><div class="label">Generate a<br />video</div></article>
+        <article class="card"><div class="thumb g2"></div><div class="label">Render an image<br />or scene</div></article>
+        <article class="card"><div class="thumb g3"></div><span class="tag">180+ models</span><div class="label">Use any AI<br />model</div></article>
+        <article class="card"><div class="thumb g4"></div><span class="tag">New</span><div class="label">Run content<br />workflows</div></article>
+        <article class="card"><div class="thumb g5"></div><div class="label">Explore<br />effects</div></article>
+        <article class="card"><div class="thumb g6"></div><div class="label">Animate a<br />still photo</div></article>
+        <article class="card"><div class="thumb g7"></div><div class="label">Build an<br />agent</div></article>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI prompt bar -->
+  <div class="wrap">
+    <div class="prompt">
+      <div class="prompt-top">
+        <div class="prompt-tabs">
+          <button class="prompt-tab active">▦ Image</button>
+          <button class="prompt-tab">▶ Video</button>
+          <button class="prompt-tab">♪ Audio</button>
+        </div>
+        <input class="prompt-in" id="promptInput" placeholder="Describe what you want to create…" />
+        <button class="inspire" id="inspireBtn">✨ Inspire me <i class="chev" style="width:8px;height:8px;border-right:2px solid #999;border-bottom:2px solid #999;transform:rotate(45deg) translateY(-2px);display:inline-block"></i></button>
+      </div>
+      <div class="prompt-bottom">
+        <button class="mini-select">＋ Reference</button>
+        <button class="mini-select">▣ Layout</button>
+        <button class="mini-select">✦ Aurora 2.5 <span style="opacity:.6">▾</span></button>
+        <button class="mini-select">1080p · Auto · Auto <span style="opacity:.6">▾</span></button>
+        <span class="spacer"></span>
+        <button class="round-btn" aria-label="Mic">🎤</button>
+        <button class="round-btn brand" aria-label="Send">↑</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPLIT FEATURE PANEL ============ -->
+<section class="section" id="video">
+  <div class="wrap">
+    <div class="panel">
+      <div>
+        <h2>Turn one idea into a <em class="accent">full video production</em></h2>
+        <p>Script it, cast it, shoot it and cut it — all in a single pass. Your agent plans the shots, the models render them, and you stay in the director's chair.</p>
+        <a class="btn btn-white" href="#">Meet the film agent <span class="arrow">→</span></a>
+      </div>
+      <div class="panel-media">
+        <div class="media-tile g2"><span class="play">▶</span><span class="cap">Generate a scene</span></div>
+        <div class="media-tile g5"><span class="cap">Add your references</span></div>
+        <div class="media-tile g8"><span class="cap">Animate a still</span></div>
+        <div class="media-tile g3"><span class="cap">Extend the take</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEASONAL IDEAS ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🎃</span>
+        <h2>Make something <em class="accent">seasonal</em></h2>
+      </div>
+      <a class="more" href="#">See all ideas →</a>
+    </div>
+    <div class="chips scroll">
+      <button class="chip active">Spooky edits</button>
+      <button class="chip">Festival posters</button>
+      <button class="chip">Party invites</button>
+      <button class="chip">Product drops</button>
+      <button class="chip">Cosplay looks</button>
+      <button class="chip">Recipe reels</button>
+      <button class="chip">Travel diaries</button>
+      <button class="chip">Birthday cards</button>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card tall"><div class="thumb g9"></div><div class="label">Lantern portrait</div></article>
+        <article class="card tall"><div class="thumb g6"></div><div class="label">Pumpkin flat-lay</div></article>
+        <article class="card tall"><div class="thumb g5"></div><div class="label">Golden hour poster</div></article>
+        <article class="card tall"><div class="thumb g10"></div><div class="label">Forest promo</div></article>
+        <article class="card tall"><div class="thumb g3"></div><div class="label">Party invite</div></article>
+        <article class="card tall"><div class="thumb g2"></div><div class="label">Costume reveal</div></article>
+        <article class="card tall"><div class="thumb g7"></div><div class="label">Neon night</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHALLENGES ============ -->
+<section class="section" style="padding-top:0" id="community">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🏆</span>
+        <h2>Join challenges &amp; <em class="accent">win prizes</em></h2>
+      </div>
+      <a class="more" href="#">See all challenges →</a>
+    </div>
+    <div class="chips scroll">
+      <button class="chip active">LIVE · 30-second story challenge</button>
+      <button class="chip">LIVE · Night portrait challenge</button>
+      <button class="chip">ENDED · Mini short-film sprint</button>
+      <button class="chip">ENDED · Product motion week</button>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card wide"><div class="thumb g3"></div><span class="tag">$10,000 prize pool</span><div class="label">Story challenge · entries open</div></article>
+        <article class="card wide"><div class="thumb g8"></div><div class="label">By @studio.noor</div></article>
+        <article class="card wide"><div class="thumb g4"></div><div class="label">By @framefolk</div></article>
+        <article class="card wide"><div class="thumb g1"></div><div class="label">By @kestrel</div></article>
+        <article class="card wide"><div class="thumb g10"></div><div class="label">By @lumenlab</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRENDS ============ -->
+<section class="section" style="padding-top:0" id="trends">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">📈</span>
+        <h2>Follow the <em class="accent">latest trends</em></h2>
+      </div>
+      <a class="more" href="#">See all →</a>
+    </div>
+    <div class="chips scroll">
+      <button class="chip active">Auto filters</button>
+      <button class="chip">Ad generator</button>
+      <button class="chip">Social virals</button>
+      <button class="chip">Dance generator</button>
+      <button class="chip">Image to video</button>
+      <button class="chip">Collage maker</button>
+      <button class="chip">Birthday</button>
+      <button class="chip">Summer vibes</button>
+      <button class="chip">3D characters</button>
+      <button class="chip">Transitions</button>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card tall"><div class="thumb g4"></div><div class="label">Cathedral light</div></article>
+        <article class="card tall"><div class="thumb g5"></div><div class="label">Pumpkin pile</div></article>
+        <article class="card tall"><div class="thumb g9"></div><div class="label">Angel &amp; devil duo</div></article>
+        <article class="card tall"><div class="thumb g7"></div><div class="label">Skull flicker</div></article>
+        <article class="card tall"><div class="thumb g10"></div><div class="label">Broom ride</div></article>
+        <article class="card tall"><div class="thumb g2"></div><div class="label">Mirror demon</div></article>
+        <article class="card tall"><div class="thumb g6"></div><div class="label">Hallow glow</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKFLOWS ============ -->
+<section class="section" style="padding-top:0" id="business">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🔀</span>
+        <h2>Run a full <em class="accent">workflow</em> in one click</h2>
+      </div>
+      <a class="more" href="#">Explore workflows →</a>
+    </div>
+    <div class="chips">
+      <button class="chip active">Product ads</button>
+      <button class="chip">Social content</button>
+      <button class="chip">Stories &amp; animation</button>
+      <button class="chip">Product photos</button>
+      <button class="chip">Branding</button>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card wide"><div class="thumb g5"></div><div class="label">Smoothie splash ads</div></article>
+        <article class="card wide"><div class="thumb g8"></div><div class="label">Cinematic shoe ads</div></article>
+        <article class="card wide"><div class="thumb g9"></div><div class="label">Bakery campaigns</div></article>
+        <article class="card wide"><div class="thumb g3"></div><div class="label">Claw-machine reveals</div></article>
+        <article class="card wide"><div class="thumb g4"></div><div class="label">360° product spins</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMAGE TO VIDEO ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🎞️</span>
+        <h2>Turn your images <em class="accent">into videos</em></h2>
+      </div>
+      <a class="more" href="#">Explore image to video →</a>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card tall"><div class="thumb g10"></div><div class="label">Add a breeze to your photo</div></article>
+        <article class="card tall"><div class="thumb g6"></div><div class="label">Freeze a moment in time</div></article>
+        <article class="card tall"><div class="thumb g2"></div><div class="label">Put your product in motion</div></article>
+        <article class="card tall"><div class="thumb g4"></div><div class="label">Zoom out from your photo</div></article>
+        <article class="card tall"><div class="thumb g9"></div><div class="label">Animate a paper cutout</div></article>
+        <article class="card tall"><div class="thumb g3"></div><div class="label">Add a burst of color</div></article>
+        <article class="card tall"><div class="thumb g7"></div><div class="label">Make products float</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEW THIS MONTH ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🔥</span>
+        <h2>New <em class="accent">this month</em></h2>
+      </div>
+      <a class="more" href="#">See all →</a>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card wide"><div class="thumb g7"></div><span class="tag">Trending</span><div class="label">Small stories, big drama</div></article>
+        <article class="card wide"><div class="thumb g8"></div><span class="tag">Trending</span><div class="label">$5,000 for your best nightmare</div></article>
+        <article class="card wide"><div class="thumb g1"></div><span class="tag">Hot</span><div class="label">WAN 3.0 unlimited</div></article>
+        <article class="card wide"><div class="thumb g5"></div><div class="label">Fresh motion pack</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODELS ============ -->
+<section class="section" style="padding-top:0" id="agents">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🤖</span>
+        <h2>Generate images with <em class="accent">50+ models</em></h2>
+      </div>
+      <a class="more" href="#">Generate an image →</a>
+    </div>
+    <div class="carousel" data-carousel>
+      <button class="nav-arrow prev" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="nav-arrow next" data-dir="1" aria-label="Next">›</button>
+      <div class="rail" data-rail>
+        <article class="card tall"><div class="thumb g4"></div><span class="tag">Flux.2 Pro</span></article>
+        <article class="card tall"><div class="thumb g10"></div><span class="tag">Flux.2 Pro</span></article>
+        <article class="card tall"><div class="thumb g9"></div><span class="tag">Ideogram V4</span></article>
+        <article class="card tall"><div class="thumb g2"></div><span class="tag">Ideogram V4</span></article>
+        <article class="card tall"><div class="thumb g7"></div><span class="tag">Nano Banana 2</span></article>
+        <article class="card tall"><div class="thumb g3"></div><span class="tag">Nano Banana 2</span></article>
+        <article class="card tall"><div class="thumb g5"></div><span class="tag">Seedream 4</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRATIONS ============ -->
+<section class="section" style="padding-top:0" id="integrations">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="title">
+        <span class="ico">🧩</span>
+        <h2>Use Pixora <em class="accent">where you already work</em></h2>
+      </div>
+      <a class="more" href="#">Read the docs →</a>
+    </div>
+    <div class="integrations">
+      <div class="integration"><span class="glyph">⌘</span><div><b>Pixora MCP</b><span>Connect any agent</span></div></div>
+      <div class="integration"><span class="glyph">💬</span><div><b>ChatGPT</b><span>Generate in chat</span></div></div>
+      <div class="integration"><span class="glyph">✳</span><div><b>Claude</b><span>Design from a prompt</span></div></div>
+      <div class="integration"><span class="glyph">⚡</span><div><b>Grok</b><span>Image in conversation</span></div></div>
+      <div class="integration"><span class="glyph">✦</span><div><b>Gemini</b><span>Multimodal creation</span></div></div>
+      <div class="integration"><span class="glyph">⟨/⟩</span><div><b>Cursor</b><span>Assets in your IDE</span></div></div>
+      <div class="integration"><span class="glyph">❯_</span><div><b>Codex</b><span>Build with APIs</span></div></div>
+      <div class="integration"><span class="glyph">⌁</span><div><b>Pixora CLI</b><span>Ship from terminal</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CENTERED TABS / SHOWCASE ============ -->
+<section class="section" id="images">
+  <div class="wrap center">
+    <h2>Create <em class="accent">your way</em></h2>
+    <div class="segmented" id="showcaseTabs">
+      <button class="seg-btn active" data-copy="Generate images, videos and audio with the world's top AI models. Explore, create and share your work.">AI Playground</button>
+      <button class="seg-btn" data-copy="Chain models and steps into a reusable pipeline. Run the whole thing with a single click.">Flow</button>
+      <button class="seg-btn" data-copy="A living brand system that keeps every asset on-tone, on-palette and ready to publish.">Aura</button>
+    </div>
+    <p class="section-sub" id="showcaseCopy">Generate images, videos and audio with the world's top AI models. Explore, create and share your work.</p>
+
+    <div class="showcase">
+      <div class="overlay-copy">
+        <h3>One prompt, whole scenes</h3>
+        <p>Reference images, camera moves and aspect ratios — all in the same composer.</p>
+      </div>
+      <div class="ctrls">
+        <button class="round-btn">▶</button>
+        <button class="round-btn">🔊</button>
+      </div>
+    </div>
+
+    <div class="center-cta"><a class="btn btn-brand" href="#">Explore AI Playground</a></div>
+  </div>
+</section>
+
+<!-- ============ GLASS OVERLAY PANEL ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap center">
+    <div class="eyebrow">The social-native creative platform</div>
+    <h2>Scale from first post to <em class="accent">full production</em></h2>
+    <p class="section-sub">Same platform whether you are editing one selfie for fun or shipping fifty assets for a launch.</p>
+
+    <div class="glass-wrap">
+      <div style="text-align:left">
+        <div class="glass-card">
+          <div class="ico-badge">✿</div>
+          <h3>Make things worth posting</h3>
+          <p>Retouch your photos, animate them into video, jump on trends and turn everyday moments into posts people actually watch. No editing experience needed.</p>
+          <a class="btn btn-white btn-sm" href="#">Level up your selfies with AI</a>
+        </div>
+        <div class="glass-stack">
+          <button class="glass-pill">Sell with video and product shots</button>
+          <button class="glass-pill">Produce at team scale</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE GRID ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <h2>Your next video <em class="accent">starts here</em></h2>
+    <p class="section-sub" style="margin-left:0">Make the visuals, add motion, edit your clips and build a workflow you can use again.</p>
+    <div class="grid-3" style="margin-top:34px">
+      <article class="feature-card">
+        <div class="art g9"><span class="play">▶</span></div>
+        <div class="body"><h3>Make your next video</h3><p>Turn an idea into video with the AI models available in Pixora.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="art g3"><span class="play">▶</span></div>
+        <div class="body"><h3>Edit videos for every channel</h3><p>Trim, merge and resize clips for your next post or campaign.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="art g10"><span class="play">▶</span></div>
+        <div class="body"><h3>Create images for your video</h3><p>Generate scene ideas, product shots and visual references before you add motion.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="art g4"><span class="play">▶</span></div>
+        <div class="body"><h3>Turn images into video</h3><p>Add motion to product shots and stills for ads, stories and social posts.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="art g7"><span class="play">▶</span></div>
+        <div class="body"><h3>Build repeatable creative workflows</h3><p>Connect models and creative steps in a flow you can remix and run again.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="art g5"><span class="play">▶</span></div>
+        <div class="body"><h3>Earn from your creative work</h3><p>Explore content opportunities, create with Pixora and share on your own channels.</p></div>
+      </article>
+    </div>
+    <div class="center-cta"><a class="btn btn-white" href="#">Start a video</a></div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="section" style="padding-bottom:0">
+  <div class="wrap center">
+    <h2>Millions create here <em class="accent">every day</em></h2>
+    <p class="section-sub">Whether you're posting for the first time or shipping hundreds of assets a month, this is the scale Pixora runs at.</p>
+  </div>
+</section>
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>4.6M+</b><span>AI assets generated daily</span></div>
+    <div class="stat"><b>200K+</b><span>videos generated daily</span></div>
+    <div class="stat"><b>10M+</b><span>people visit regularly</span></div>
+    <div class="stat"><b>300M+</b><span>videos, images, effects &amp; more</span></div>
+  </div>
+</div>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="center">
+      <h2>What creators &amp; small businesses <em class="accent">are saying</em></h2>
+    </div>
+    <div class="grid-3" style="margin-top:34px">
+      <article class="quote">
+        <div class="stars">★★★★★</div>
+        <h3>A consistent brand, without a design team</h3>
+        <p>“Every reel, story and product card now looks like it came from the same studio — because it did.”</p>
+        <div class="who"><span class="av"></span><div><b>Amara O.</b><span>Skincare founder</span></div></div>
+      </article>
+      <article class="quote">
+        <div class="stars">★★★★★</div>
+        <h3>Everything I need to sell online</h3>
+        <p>“Product shots, motion ads and captions in one afternoon. My store finally looks alive.”</p>
+        <div class="who"><span class="av"></span><div><b>Daniel K.</b><span>Store owner</span></div></div>
+      </article>
+      <article class="quote">
+        <div class="stars">★★★★★</div>
+        <h3>60–100K views per post</h3>
+        <p>“I batch a month of clips on Sunday and the workflow runs itself the rest of the week.”</p>
+        <div class="who"><span class="av"></span><div><b>Sofía R.</b><span>Content creator</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="center">
+      <h2>Find a plan that <em class="accent">works for you</em></h2>
+      <p class="section-sub">Start free. Upgrade when your output does.</p>
+    </div>
+
+    <div class="plans" style="margin-top:44px">
+      <!-- Free -->
+      <article class="plan">
+        <h3>Free</h3>
+        <div class="price">$0 <small>/ month</small></div>
+        <div class="note">For trying things out and light posting.</div>
+        <a class="btn btn-ghost" href="#">Get started</a>
+        <ul>
+          <li><span class="ck">✓</span> Core photo &amp; video editing tools</li>
+          <li><span class="ck">✓</span> Basic background &amp; object removal</li>
+          <li><span class="ck">✓</span> Standard AI image generations</li>
+          <li><span class="ck">✓</span> Thousands of free templates</li>
+          <li><span class="ck">✓</span> 2 GB of cloud storage</li>
+        </ul>
+      </article>
+
+      <!-- Pro -->
+      <article class="plan pro">
+        <span class="flag">Most popular</span>
+        <h3>Pro</h3>
+        <div class="price">$15 <small>/ month</small></div>
+        <div class="note">For creators shipping content every week.</div>
+        <a class="btn btn-brand" href="#">Start Pro</a>
+        <ul>
+          <li><span class="ck">✓</span> Access to all photo &amp; video editing features</li>
+          <li><span class="ck">✓</span> Advanced background &amp; object removal</li>
+          <li><span class="ck">✓</span> Parallel video generations with powerful AI models</li>
+          <li><span class="ck">✓</span> Unlimited image generations with our fast model</li>
+          <li><span class="ck">✓</span> 1-tap image enhancer</li>
+          <li><span class="ck">✓</span> Millions of stock photos &amp; clips</li>
+          <li><span class="ck">✓</span> Trendy fonts, text styles &amp; stickers</li>
+          <li><span class="ck">✓</span> Thousands of premium templates</li>
+          <li><span class="ck">✓</span> Support for 3+ brand kits</li>
+          <li><span class="ck">✓</span> Bulk edit up to 50 images at once</li>
+          <li><span class="ck">✓</span> 100 GB of cloud storage</li>
+        </ul>
+        <div class="divider"></div>
+        <div class="subhead">New features:</div>
+        <ul>
+          <li><span class="ck">✓</span> 15+ creative AI agents that plan, execute and deliver</li>
+          <li><span class="ck">✓</span> Auto-generate content from your terminal or agent</li>
+          <li><span class="ck">✓</span> Use Pixora inside your favourite coding tools via MCP</li>
+        </ul>
+      </article>
+
+      <!-- Ultra -->
+      <article class="plan ultra">
+        <h3>Ultra</h3>
+        <div class="price">$30 <small>/ month</small></div>
+        <div class="note">For teams running campaigns at scale.</div>
+        <a class="btn btn-white" href="#">Start Ultra</a>
+        <ul>
+          <li><span class="ck">✓</span> 200+ leading AI video, image and audio models</li>
+          <li><span class="ck">✓</span> Parallel video generations with the most powerful models</li>
+          <li><span class="ck">✓</span> Early access to advanced AI features</li>
+          <li><span class="ck">✓</span> Unlimited image generations</li>
+          <li><span class="ck">✓</span> Add-on credits that never expire</li>
+          <li><span class="ck">✓</span> Up to 6.5M stock videos</li>
+          <li><span class="ck">✓</span> Bulk edit up to 100 images at once</li>
+          <li><span class="ck">✓</span> Support for 10+ brand kits</li>
+          <li><span class="ck">✓</span> Create ad variations &amp; localize</li>
+          <li><span class="ck">✓</span> Track ads performance</li>
+          <li><span class="ck">✓</span> Add team seats</li>
+          <li><span class="ck">✓</span> 300 GB of cloud storage per seat</li>
+        </ul>
+        <div class="divider"></div>
+        <div class="subhead">New features:</div>
+        <ul>
+          <li><span class="ck">✓</span> 15+ creative AI agents across video, brand and localization</li>
+          <li><span class="ck">✓</span> Auto-generate content from your terminal or agent</li>
+          <li><span class="ck">✓</span> Use Pixora inside your favourite coding tools via MCP</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FULL BLEED CTA ============ -->
+<section class="bleed">
+  <div>
+    <h2>Built for creators, marketers and teams with big aspirations</h2>
+    <p>From solo creators to agencies running several campaigns at once. Scale your creative output without scaling your team — build workflows once, reuse across formats, themes and campaigns.</p>
+    <a class="btn btn-brand" href="#">Start creating now</a>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="products">
+  <div class="wrap">
+    <h2>Explore our <em class="accent">creative products</em></h2>
+    <div class="chips">
+      <button class="chip">AI Playground</button>
+      <button class="chip">Pixora Flow</button>
+      <button class="chip">Workflow Templates</button>
+      <button class="chip">Video Studio</button>
+      <button class="chip">AI Video Generator</button>
+      <button class="chip">AI Image Editor</button>
+      <button class="chip">Content Library</button>
+      <button class="chip">AI Agents</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <h4>Video</h4>
+        <a href="#">AI video generator</a><a href="#">Video editor</a><a href="#">Image to video</a><a href="#">Video extend</a><a href="#">Text to video</a>
+      </div>
+      <div>
+        <h4>Audio</h4>
+        <a href="#">AI music generator</a><a href="#">Voice over</a><a href="#">Sound effects</a><a href="#">Audio cleanup</a>
+      </div>
+      <div>
+        <h4>Images</h4>
+        <a href="#">AI image generator</a><a href="#">Photo editor</a><a href="#">Background remover</a><a href="#">Upscaler</a><a href="#">Collage maker</a>
+      </div>
+      <div>
+        <h4>AI workflows</h4>
+        <a href="#">Flow</a><a href="#">Templates</a><a href="#">Batch generate</a><a href="#">Brand kits</a>
+      </div>
+      <div>
+        <h4>Creators</h4>
+        <a href="#">Challenges</a><a href="#">Trending</a><a href="#">Creator fund</a><a href="#">Community</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="#">Help center</a><a href="#">API docs</a><a href="#">MCP guide</a><a href="#">Blog</a><a href="#">Careers</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <a class="logo" href="#" style="font-size:20px"><span class="mark" style="width:26px;height:26px;font-size:13px">◆</span> Pixora</a>
+      <div class="socials">
+        <a href="#" aria-label="X">𝕏</a>
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+      </div>
+      <div>© 2026 Pixora · Design study replica · <a href="#" style="text-decoration:underline">Privacy</a> · <a href="#" style="text-decoration:underline">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
