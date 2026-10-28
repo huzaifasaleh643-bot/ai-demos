@@ -7,10 +7,10 @@
    ============================================================ */
 
 :root {
-  --brand: #f40bf4;
-  --brand-bright: #ff47ff;
-  --brand-deep: #c209c1;
-  --brand-soft: rgba(244, 11, 244, 0.14);
+  --brand: #00ff9d;
+  --brand-bright: #33ffae;
+  --brand-deep: #00c470;
+  --brand-soft: rgba(0, 255, 157, 0.14);
 
   --bg: #000000;
   --bg-panel: #111111;
